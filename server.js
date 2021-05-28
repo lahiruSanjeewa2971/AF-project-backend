@@ -40,6 +40,9 @@ connection.once("open", ()=>{
     console.log('Mongodb connected..!');
 })
 
+const messageRouter = require('./routes/message.js');
+app.use("/message", messageRouter);
+
 
 app.listen(PORT, ()=>{
     console.log('Server is up and running on :', PORT)
