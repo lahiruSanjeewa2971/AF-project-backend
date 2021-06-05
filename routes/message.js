@@ -20,6 +20,14 @@ messageRouter.route("/addnewmessage").post((req, res) => {
     }).catch((err) => {
         console.log(err);
     })
-
+})
+messageRouter.route("/").get((req, res) => {
+    Message.find({name: "Lahiru"}, function(docs, err){
+        if(!err){
+            res.send(docs)
+        }else{
+            res.send(err)
+        }
+    })
 })
 module.exports = messageRouter;

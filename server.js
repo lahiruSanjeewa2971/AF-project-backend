@@ -43,6 +43,12 @@ connection.once("open", ()=>{
 const messageRouter = require('./routes/message.js');
 app.use("/message", messageRouter);
 
+const workshopRouter = require('./routes/workshop.js');
+app.use("/workshop", workshopRouter);
+
+const Editormodel = require('./routes/editoRoute.js');
+app.use('/users', Editormodel)
+
 
 app.listen(PORT, ()=>{
     console.log('Server is up and running on :', PORT)
