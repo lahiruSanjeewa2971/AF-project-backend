@@ -79,6 +79,104 @@ const userC = {
         }
 
     },
+
+    adminLogin: async(req,res) => {
+        try{
+            const {email, password} = req.body;
+
+            const user = await Users.findOne({"email":"admin@icaf.com"})
+            if(!user) return res.status(400).json({msg: "Admin User does not exist."})
+
+            const isMatch = await bcrypt.compare(password, user.password)
+            if(!isMatch) return res.status(400).json({msg: "Admin Password is Incorrect..Please try again"})
+
+            //after successfully login to the system. create access token and refresh token
+            const accesstoken = createAccessToken({id: user._id})
+            const refreshtoken = createRefreshToken({id: user._id})
+            
+
+            res.cookie('refreshtoken', refreshtoken,{
+                httpOnly: true,
+                path: '/user/refresh_token'
+            })
+
+            
+            res.json({accesstoken})
+
+
+        }catch(err){
+
+            return res.status(500).json({msg: err.message})
+
+        }
+
+    },
+    reviewerLogin: async(req,res) => {
+        try{
+            const {email, password} = req.body;
+
+            const user = await Users.findOne({"email":"reviewer@icaf.com"})
+            if(!user) return res.status(400).json({msg: "Reviewer User does not exist."})
+
+            const isMatch = await bcrypt.compare(password, user.password)
+            if(!isMatch) return res.status(400).json({msg: "Reviewer Password is Incorrect..Please try again"})
+
+            //after successfully login to the system. create access token and refresh token
+            const accesstoken = createAccessToken({id: user._id})
+            const refreshtoken = createRefreshToken({id: user._id})
+            
+
+            res.cookie('refreshtoken', refreshtoken,{
+                httpOnly: true,
+                path: '/user/refresh_token'
+            })
+
+            
+            res.json({accesstoken})
+
+
+        }catch(err){
+
+            return res.status(500).json({msg: err.message})
+
+        }
+
+    },
+
+    editorLogin: async(req,res) => {
+        try{
+            const {email, password} = req.body;
+
+            const user = await Users.findOne({"email":"editor@icaf.com"})
+            if(!user) return res.status(400).json({msg: "Editor User does not exist."})
+
+            const isMatch = await bcrypt.compare(password, user.password)
+            if(!isMatch) return res.status(400).json({msg: "Editor Password is Incorrect..Please try again"})
+
+            //after successfully login to the system. create access token and refresh token
+            const accesstoken = createAccessToken({id: user._id})
+            const refreshtoken = createRefreshToken({id: user._id})
+            
+
+            res.cookie('refreshtoken', refreshtoken,{
+                httpOnly: true,
+                path: '/user/refresh_token'
+            })
+
+            
+            res.json({accesstoken})
+
+
+        }catch(err){
+
+            return res.status(500).json({msg: err.message})
+
+        }
+
+    },
+
+
+
     logout: async(req,res) => {
         try{
             res.clearCookie('refreshtoken',{path:'/user/refresh_token'})
