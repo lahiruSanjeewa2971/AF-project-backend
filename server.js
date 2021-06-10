@@ -46,8 +46,11 @@ app.use("/message", messageRouter);
 const workshopRouter = require('./routes/workshop.js');
 app.use("/workshop", workshopRouter);
 
+const conferenceRouter = require('./routes/conference.js');
+app.use("/conference", conferenceRouter);
+
 const Editormodel = require('./routes/editoRoute.js');
-app.use('/users', Editormodel)
+app.use('/users', Editormodel);
 
 
 app.listen(PORT, ()=>{
