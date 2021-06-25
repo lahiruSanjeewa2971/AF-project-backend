@@ -24,6 +24,9 @@ app.use(cookieParser())
 
 // Routes
 app.use('/user', require('./routes/userRouter'))
+app.use('/api', require('./routes/researcherRoute'))
+app.use('/api', require('./routes/upload'))
+app.use('/api', require('./routes/workshopRouter'))
 
 const URL = process.env.MONGODB_URL;
 

@@ -12,6 +12,9 @@ router.post('/login', userC.login)
 router.post('/adminlogin', userC.adminLogin)
 router.post('/reviewerlogin', userC.reviewerLogin)
 router.post('/editorlogin', userC.editorLogin)
+router.post('/researcherlogin', userC.researcherLogin)
+router.post('/workshoplogin', userC.workshopLogin)
+
 
 
 router.get('/logout', userC.logout)

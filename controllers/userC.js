@@ -11,7 +11,7 @@ const userC = {
     register: async(req, res) => {
         try{
 
-            const {name, email, password} = req.body;
+            const {name, email,mobile,role, password} = req.body;
 
             const user = await Users.findOne({email})
             if(user) return res.status(400).json({msg: "The email already exists"})
@@ -19,11 +19,14 @@ const userC = {
             if(password.length < 6)
             return res.status(400).json({msg: "Password Should be at least 6 Characters"})
 
+            if(mobile.length < 10)
+            return res.status(400).json({msg: "There should be 10 Digits for mobile Number"})
+
             
 
             const passwordHash = await bcrypt.hash(password,10)
             const newUser = new Users({
-                name, email, password: passwordHash
+                name, email,mobile,role, password: passwordHash
             })
 
 
@@ -79,6 +82,71 @@ const userC = {
         }
 
     },
+
+    researcherLogin: async(req,res) => {
+        try{
+            const {email, password} = req.body;
+
+            const user = await Users.findOne({email})
+            if(!user) return res.status(400).json({msg: "User does not exist."})
+
+            const isMatch = await bcrypt.compare(password, user.password)
+            if(!isMatch) return res.status(400).json({msg: "Password is Incorrect..Please try again"})
+
+            //after successfully login to the system. create access token and refresh token
+            const accesstoken = createAccessToken({id: user._id})
+            const refreshtoken = createRefreshToken({id: user._id})
+            
+
+            res.cookie('refreshtoken', refreshtoken,{
+                httpOnly: true,
+                path: '/user/refresh_token'
+            })
+
+            
+            res.json({accesstoken})
+
+
+        }catch(err){
+
+            return res.status(500).json({msg: err.message})
+
+        }
+
+    },
+
+    workshopLogin: async(req,res) => {
+        try{
+            const {email, password} = req.body;
+
+            const user = await Users.findOne({email})
+            if(!user) return res.status(400).json({msg: "User does not exist."})
+
+            const isMatch = await bcrypt.compare(password, user.password)
+            if(!isMatch) return res.status(400).json({msg: "Password is Incorrect..Please try again"})
+
+            //after successfully login to the system. create access token and refresh token
+            const accesstoken = createAccessToken({id: user._id})
+            const refreshtoken = createRefreshToken({id: user._id})
+            
+
+            res.cookie('refreshtoken', refreshtoken,{
+                httpOnly: true,
+                path: '/user/refresh_token'
+            })
+
+            
+            res.json({accesstoken})
+
+
+        }catch(err){
+
+            return res.status(500).json({msg: err.message})
+
+        }
+
+    },
+
 
     adminLogin: async(req,res) => {
         try{

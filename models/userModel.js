@@ -21,7 +21,13 @@ const userSchema = new mongoose.Schema({
     role: {
         type: Number,
         default:0
+    },
+
+    mobile: {
+        type: Number,
+        default:0
     }
+
 
 },{
     //using timestamps we can know created time and date
