@@ -46,8 +46,8 @@ connection.once("open", ()=>{
 const messageRouter = require('./routes/message.js');
 app.use("/message", messageRouter);
 
-const workshopRouter = require('./routes/workshop.js');
-app.use("/workshop", workshopRouter);
+const editorDashboardRouter = require('./routes/EditorDashboard.js');
+app.use("/workshop", editorDashboardRouter);
 
 const conferenceRouter = require('./routes/conference.js');
 app.use("/conference", conferenceRouter);

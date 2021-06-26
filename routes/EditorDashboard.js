@@ -1,29 +1,8 @@
-const workshopRouter = require('express').Router();
-let Workshop = require('../models/workshop');
+const editorDashboardRouter = require('express').Router();
+let EditorDashboard = require('../models/workshopModel');
 
-//add new workshop
-workshopRouter.route("/addworkshop").post((req, res) => {
-    const workshopid = req.body.workshopid;
-    const name = req.body.name;
-    const title = req.body.title;
-    const place = req.body.place;
-    const guestSpeaker = req.body.guestSpeaker;
-    const newWorkshop = new Workshop({
-        workshopid,
-        name,
-        title,
-        place,
-        guestSpeaker,
-    })
-    newWorkshop.save().then(() => {
-        res.json("Workshop added")
-    }).catch((err) => {
-        console.log(err)
-    })
-})
-//Display not checked workshops by editor
-workshopRouter.route("/").get((req, res)=>{
-    Workshop.find({status: "un_checked"}, function(docs, err){
+editorDashboardRouter.route("/").get((req, res)=>{
+    EditorDashboard.find({status: "un_checked"}, function(docs, err){
         if(!err){
             res.send(docs)
         }else{
@@ -32,7 +11,7 @@ workshopRouter.route("/").get((req, res)=>{
     })
 })
 //Display all workshops, uploaded
-workshopRouter.route("/displayall").get((req, res)=>{
+/**workshopRouter.route("/displayall").get((req, res)=>{
     Workshop.find({"status": {$ne: "un_checked"}}, function(docs, err){
         if(!err){
             res.send(docs)
@@ -41,7 +20,7 @@ workshopRouter.route("/displayall").get((req, res)=>{
         }
     })
 })
-/**
+
  * serviceRouter.route("/getservice").post(async (req, res) => {
     Service.find({serviceid:req.body.serviceid}, (docs, err) => {
         if(!err){
@@ -52,7 +31,7 @@ workshopRouter.route("/displayall").get((req, res)=>{
         }
     })
 })
- */
+ 
 workshopRouter.route("/getworkshop").post(async (req, res) => {
     Workshop.find({workshopid: req.body.workshopid}, (docs, err) => {
         if(!err){
@@ -84,7 +63,6 @@ workshopRouter.route("/getworkshop").post(async (req, res) => {
 
     })
 })
- */
 workshopRouter.route("/update").post(async (req, res) => {
     Workshop.findOneAndUpdate({workshopid: req.body.workshopid}, {
         status: req.body.status
@@ -96,5 +74,6 @@ workshopRouter.route("/update").post(async (req, res) => {
         }
     })
 })
+*/
 
-module.exports = workshopRouter;
+module.exports = editorDashboardRouter;
