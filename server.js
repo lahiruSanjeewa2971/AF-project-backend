@@ -46,14 +46,17 @@ connection.once("open", ()=>{
 const messageRouter = require('./routes/message.js');
 app.use("/message", messageRouter);
 
-const editorDashboardRouter = require('./routes/EditorDashboard.js');
-app.use("/workshop", editorDashboardRouter);
+const EditorDashboardWorkshop = require('./routes/EditorDashboardWorkshop.js');
+app.use("/workshop", EditorDashboardWorkshop);
 
 const conferenceRouter = require('./routes/conference.js');
 app.use("/conference", conferenceRouter);
 
 const Editormodel = require('./routes/editoRoute.js');
 app.use('/users', Editormodel);
+
+const WorkshopsRouter = require('./routes/EditorDashboardWorkshop.js');
+app.use('/workshops', WorkshopsRouter);
 
 
 app.listen(PORT, ()=>{

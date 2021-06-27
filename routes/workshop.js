@@ -54,7 +54,7 @@ workshopRouter.route("/displayall").get((req, res)=>{
 })
  */
 workshopRouter.route("/getworkshop").post(async (req, res) => {
-    Workshop.find({workshopid: req.body.workshopid}, (docs, err) => {
+    Workshop.find({workshopid: req.body.workshop_id}, (docs, err) => {
         if(!err){
             res.send(docs);
         }else{

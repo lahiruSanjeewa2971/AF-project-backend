@@ -35,6 +35,38 @@ conferenceRouter.route("/displayall").get((req, res)=>{
         }
     })
 })
+conferenceRouter.route("/getConf").post(async(req, res) => {
+    Conference.find({conferenceid: req.body.conferenceid}, (docs, err) => {
+        if(!err){
+            res.send(docs);
+        }
+        else{
+            res.send(err);
+        }
+    })
+})
+conferenceRouter.route("/getConference").post(async (req, res) => {
+    Conference.find({conferenceid: req.body.conferenceid}, (docs, err) => {
+        if(!err){
+            res.send(docs);
+        }
+        else{
+            res.send(err);
+        }
+    })
+})
+/**
+ * serviceRouter.route("/getservice").post(async (req, res) => {
+    Service.find({serviceid:req.body.serviceid}, (docs, err) => {
+        if(!err){
+            res.send(docs);
+        }
+        else{
+            res.send(err);
+        }
+    })
+})
+ */
 
 conferenceRouter.route("/updateStatus").post(async (req, res) => {
     Conference.findOneAndUpdate({conferenceid: req.body.conferenceid}, {
