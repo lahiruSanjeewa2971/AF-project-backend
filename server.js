@@ -50,7 +50,10 @@ const EditorDashboardWorkshop = require('./routes/EditorDashboardWorkshop.js');
 app.use("/workshop", EditorDashboardWorkshop);
 
 const conferenceRouter = require('./routes/conference.js');
-app.use("/conference", conferenceRouter);
+app.use("/conferences", conferenceRouter);
+
+const adminConferenceRouter = require('./routes/adminConferenceView.js');
+app.use("/adminConference", adminConferenceRouter);
 
 const Editormodel = require('./routes/editoRoute.js');
 app.use('/users', Editormodel);
