@@ -33,7 +33,7 @@ workshopRouter.route("/").get((req, res)=>{
 })
 //Display all workshops, uploaded
 workshopRouter.route("/displayall").get((req, res)=>{
-    Workshop.find({}, function(docs, err){
+    Workshop.find({"status": {$ne: "un_checked"}}, function(docs, err){
         if(!err){
             res.send(docs)
         }else{
@@ -54,7 +54,7 @@ workshopRouter.route("/displayall").get((req, res)=>{
 })
  */
 workshopRouter.route("/getworkshop").post(async (req, res) => {
-    Workshop.find({workshopid: req.body.workshopid}, (docs, err) => {
+    Workshop.find({workshopid: req.body.workshop_id}, (docs, err) => {
         if(!err){
             res.send(docs);
         }else{
