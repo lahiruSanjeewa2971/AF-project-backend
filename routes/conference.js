@@ -35,7 +35,7 @@ conferenceRouter.route("/displayall").get((req, res)=>{
         }
     })
 })
-conferenceRouter.route("/getConf").post(async(req, res) => {
+/*conferenceRouter.route("/getConf").post(async(req, res) => {
     Conference.find({conferenceid: req.body.conferenceid}, (docs, err) => {
         if(!err){
             res.send(docs);
@@ -44,7 +44,7 @@ conferenceRouter.route("/getConf").post(async(req, res) => {
             res.send(err);
         }
     })
-})
+})*/
 conferenceRouter.route("/getConference").post(async (req, res) => {
     Conference.find({conferenceid: req.body.conferenceid}, (docs, err) => {
         if(!err){

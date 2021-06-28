@@ -58,6 +58,8 @@ app.use('/users', Editormodel);
 const WorkshopsRouter = require('./routes/EditorDashboardWorkshop.js');
 app.use('/workshops', WorkshopsRouter);
 
+const editorDisplayUserRouter = require('./routes/EditorDisplayUsers');
+app.use('/usersDisplayEditor', editorDisplayUserRouter);
 
 app.listen(PORT, ()=>{
     console.log('Server is up and running on :', PORT)
