@@ -1,4 +1,5 @@
 const conferenceRouter = require('express').Router();
+const { request } = require('express');
 let Conference = require('../models/conference');
 
 //add new conference
@@ -24,4 +25,25 @@ conferenceRouter.route("/addconference").post((req, res)=>{
         console.log(err)
     })
 })
+conferenceRouter.route("/displayconferences").get((req, res)=>{
+    Conference.find({}, function(docs, err){
+        if(!err){
+            res.send(docs)
+        }else{
+            res.send(err)
+        }
+    })
+})
+
+conferenceRouter.route("/getSingleConference").post(async (req, res) => {
+    Conference.find({conferenceid: req.body.conferenceid}, (docs, err) => {
+        if(!err){
+            res.send(docs);
+        }
+        else{
+            res.send(err);
+        }
+    })
+})
+
 module.exports = conferenceRouter;

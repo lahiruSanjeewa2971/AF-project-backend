@@ -47,11 +47,13 @@ const workshopRouter = require('./routes/workshop.js');
 app.use("/workshop", workshopRouter);
 
 const conferenceRouter = require('./routes/conference.js');
-app.use("/conference", conferenceRouter);
+app.use("/conferences", conferenceRouter);
+
+const adminConferenceRouter = require('./routes/adminConferenceView.js');
+app.use("/adminConference", adminConferenceRouter);
 
 const Editormodel = require('./routes/editoRoute.js');
 app.use('/users', Editormodel);
-
 
 app.listen(PORT, ()=>{
     console.log('Server is up and running on :', PORT)
