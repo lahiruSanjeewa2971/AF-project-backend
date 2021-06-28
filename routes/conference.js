@@ -25,13 +25,10 @@ conferenceRouter.route("/addconference").post((req, res)=>{
         console.log(err)
     })
 })
-<<<<<<< HEAD
-conferenceRouter.route("/displayconferences").get((req, res)=>{
-=======
+
 
 //Display all Conferences, uploaded
 conferenceRouter.route("/displayall").get((req, res)=>{
->>>>>>> a327bf80c66c285f221a900b71d3dfed06ef2c44
     Conference.find({}, function(docs, err){
         if(!err){
             res.send(docs)
@@ -40,12 +37,9 @@ conferenceRouter.route("/displayall").get((req, res)=>{
         }
     })
 })
-<<<<<<< HEAD
 
-conferenceRouter.route("/getSingleConference").post(async (req, res) => {
-=======
+
 conferenceRouter.route("/getConf").post(async(req, res) => {
->>>>>>> a327bf80c66c285f221a900b71d3dfed06ef2c44
     Conference.find({conferenceid: req.body.conferenceid}, (docs, err) => {
         if(!err){
             res.send(docs);
@@ -55,9 +49,7 @@ conferenceRouter.route("/getConf").post(async(req, res) => {
         }
     })
 })
-<<<<<<< HEAD
 
-=======
 conferenceRouter.route("/getConference").post(async (req, res) => {
     Conference.find({conferenceid: req.body.conferenceid}, (docs, err) => {
         if(!err){
@@ -68,18 +60,6 @@ conferenceRouter.route("/getConference").post(async (req, res) => {
         }
     })
 })
-/**
- * serviceRouter.route("/getservice").post(async (req, res) => {
-    Service.find({serviceid:req.body.serviceid}, (docs, err) => {
-        if(!err){
-            res.send(docs);
-        }
-        else{
-            res.send(err);
-        }
-    })
-})
- */
 
 conferenceRouter.route("/updateStatus").post(async (req, res) => {
     Conference.findOneAndUpdate({conferenceid: req.body.conferenceid}, {
@@ -92,9 +72,15 @@ conferenceRouter.route("/updateStatus").post(async (req, res) => {
         }
     })
 })
-/**
- * var newvalues = { $set: { address: "Canyon 123" } };
-  dbo.collection("customers").updateOne(myquery, newvalues, function(err, res) 
- */
->>>>>>> a327bf80c66c285f221a900b71d3dfed06ef2c44
+//display all conferences by admin
+conferenceRouter.route("/displayconferences").get((req, res)=>{
+    Conference.find({}, function(docs, err){
+        if(!err){
+            res.send(docs)
+        }else{
+            res.send(err)
+        }
+    })
+})
+
 module.exports = conferenceRouter;
