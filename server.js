@@ -11,7 +11,7 @@ const cookieParser = require('cookie-parser')
 require("dotenv").config();
 
 const PORT = process.env.PORT || 8070;
-
+ 
 app.use(cors());
 app.use(bodyParser.json());
 app.use(express.json())
@@ -46,15 +46,34 @@ connection.once("open", ()=>{
 const messageRouter = require('./routes/message.js');
 app.use("/message", messageRouter);
 
-const workshopRouter = require('./routes/workshop.js');
-app.use("/workshop", workshopRouter);
+const EditorDashboardWorkshop = require('./routes/EditorDashboardWorkshop.js');
+app.use("/workshop", EditorDashboardWorkshop);
 
 const conferenceRouter = require('./routes/conference.js');
-app.use("/conference", conferenceRouter);
+app.use("/conferences", conferenceRouter);
+
+const adminConferenceRouter = require('./routes/adminConferenceView.js');
+app.use("/adminConference", adminConferenceRouter);
 
 const Editormodel = require('./routes/editoRoute.js');
 app.use('/users', Editormodel);
 
+const WorkshopsRouter = require('./routes/EditorDashboardWorkshop.js');
+app.use('/workshops', WorkshopsRouter);
+
+const editorConferenceRouter = require('./routes/editorConference.js');
+app.use('/editorConference', editorConferenceRouter);
+
+const editorDisplayUserRouter = require('./routes/EditorDisplayUsers');
+app.use('/usersDisplayEditor', editorDisplayUserRouter);
+
+//AdminShowAllWorkshopsRouter adminDashboardWorkshopRouter
+const adminDashboardWorkshopRouter = require('./routes/AdminDashboardWorkshops.js');
+app.use('/adminDashboardViewWorkshops', adminDashboardWorkshopRouter);
+
+//tempary user handling router
+const tempUsersViewRouter = require('./routes/tempUsersView');
+app.use('/tempuser', tempUsersViewRouter);
 
 app.listen(PORT, ()=>{
     console.log('Server is up and running on :', PORT)

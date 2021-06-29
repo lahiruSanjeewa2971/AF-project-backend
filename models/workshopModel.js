@@ -13,7 +13,7 @@ const workshopSchema = new mongoose.Schema({
         trim: true,
         required: true
     },
-    time:{
+    time:{ 
         type: String,
         trim: true,
         required: true

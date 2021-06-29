@@ -30,4 +30,15 @@ messageRouter.route("/").get((req, res) => {
         }
     })
 })
+//display
+messageRouter.route("/displaymessages").get((req, res) => {
+    Message.find({}, function(docs, err){
+        if(!err){
+            res.send(docs);
+        }
+        else{
+            res.send(err);
+        }
+    })
+})
 module.exports = messageRouter;
