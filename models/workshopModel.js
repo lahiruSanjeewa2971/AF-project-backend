@@ -37,9 +37,10 @@ const workshopSchema = new mongoose.Schema({
         required: true
 
     },
-    status: {
+    status:{
         type: String,
         default: 'un_checked'
+
     }
 
 },{
