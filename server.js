@@ -71,6 +71,15 @@ app.use('/usersDisplayEditor', editorDisplayUserRouter);
 const tempUsersViewRouter = require('./routes/tempUsersView');
 app.use('/tempuser', tempUsersViewRouter);
 
+
+
+
+const reviewerWorkshopRouter = require('./routes/reviewerWorkshopRouter.js');
+app.use("/workshops", reviewerWorkshopRouter);
+
+const ReviewerResearchRouter = require('./routes/ReviewerResearchRouter');
+app.use("/researchers", ReviewerResearchRouter);
+
 app.listen(PORT, ()=>{
     console.log('Server is up and running on :', PORT)
 })
