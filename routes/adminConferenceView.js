@@ -1,7 +1,7 @@
 const adminConferenceRouter = require('express').Router();
 let ConferenceAdmin = require('../models/conference');
 
-adminConferenceRouter.route("/getSingleConference").post(async (req, res) => {
+adminConferenceRouter.route("/getSingleConference").post( (req, res) => {
     ConferenceAdmin.find({conferenceid: req.body.conferenceid}, (docs, err) => {
         if(!err){
             res.send(docs);
@@ -24,7 +24,7 @@ adminConferenceRouter.route("/displayallEditorConferences").get((req, res) => {
 })
 
 //update conference details by editor
-adminConferenceRouter.route("/updateconference").post(async (req, res) => {
+adminConferenceRouter.route("/updateconference").post( (req, res) => {
     ConferenceAdmin.findOneAndUpdate({conferenceid: req.body.conferenceid}, {
         title: req.body.title,
         date: req.body.date,
