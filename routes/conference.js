@@ -47,6 +47,47 @@ conferenceRouter.route("/getConference").post(async (req, res) => {
         }
     })
 })
+//update conference details by editor
+conferenceRouter.route("/updateconference").post(async (req, res) => {
+    Conference.findOneAndUpdate({conferenceid: req.body.conferenceid}, {
+        title: req.body.title,
+        date: req.body.date,
+        location: req.body.location,
+        description: req.body.description,
+        note: req.body.note
+
+    }, (err) => {
+        if(!err){
+            res.send('Update details')
+        }
+        else{
+            res.send(err)
+        }
+    })
+})
+/**
+ * serviceRouter.route("/update").post(async (req, res) => {
+    Service.findOneAndUpdate({serviceid: req.body.serviceid}, {
+
+        servicename: req.body.servicename,
+        imgurl: req.body.imgurl,
+        category: req.body.category,
+        price: req.body.price,
+        owner: req.body.owner,
+        location: req.body.location
+
+    }, (err) => {
+
+        if(!err){
+            res.send("Item updated.....")
+        }
+        else{
+            res.send(err)
+        }
+
+    })
+})
+ */
 
 conferenceRouter.route("/updateStatus").post(async (req, res) => {
     Conference.findOneAndUpdate({conferenceid: req.body.conferenceid}, {

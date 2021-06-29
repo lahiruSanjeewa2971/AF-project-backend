@@ -23,4 +23,23 @@ adminConferenceRouter.route("/displayallEditorConferences").get((req, res) => {
     })
 })
 
+//update conference details by editor
+adminConferenceRouter.route("/updateconference").post(async (req, res) => {
+    ConferenceAdmin.findOneAndUpdate({conferenceid: req.body.conferenceid}, {
+        title: req.body.title,
+        date: req.body.date,
+        location: req.body.location,
+        description: req.body.description,
+        note: req.body.note
+
+    }, (err) => {
+        if(!err){
+            res.send('Updated details')
+        }
+        else{
+            res.send(err)
+        }
+    })
+})
+
 module.exports = adminConferenceRouter;

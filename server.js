@@ -67,6 +67,10 @@ app.use('/editorConference', editorConferenceRouter);
 const editorDisplayUserRouter = require('./routes/EditorDisplayUsers');
 app.use('/usersDisplayEditor', editorDisplayUserRouter);
 
+//tempary user handling router
+const tempUsersViewRouter = require('./routes/tempUsersView');
+app.use('/tempuser', tempUsersViewRouter);
+
 app.listen(PORT, ()=>{
     console.log('Server is up and running on :', PORT)
 })
