@@ -11,7 +11,7 @@ const cookieParser = require('cookie-parser')
 require("dotenv").config();
 
 const PORT = process.env.PORT || 8070;
-
+ 
 app.use(cors());
 app.use(bodyParser.json());
 app.use(express.json())
@@ -60,6 +60,9 @@ app.use('/users', Editormodel);
 
 const WorkshopsRouter = require('./routes/EditorDashboardWorkshop.js');
 app.use('/workshops', WorkshopsRouter);
+
+const editorConferenceRouter = require('./routes/editorConference.js');
+app.use('/editorConference', editorConferenceRouter);
 
 const editorDisplayUserRouter = require('./routes/EditorDisplayUsers');
 app.use('/usersDisplayEditor', editorDisplayUserRouter);

@@ -26,19 +26,6 @@ conferenceRouter.route("/addconference").post((req, res)=>{
     })
 })
 
-
-//Display all Conferences, uploaded
-conferenceRouter.route("/displayall").get((req, res)=>{
-    Conference.find({}, function(docs, err){
-        if(!err){
-            res.send(docs)
-        }else{
-            res.send(err)
-        }
-    })
-})
-
-
 conferenceRouter.route("/getConf").post(async(req, res) => {
     Conference.find({conferenceid: req.body.conferenceid}, (docs, err) => {
         if(!err){
