@@ -67,6 +67,10 @@ app.use('/editorConference', editorConferenceRouter);
 const editorDisplayUserRouter = require('./routes/EditorDisplayUsers');
 app.use('/usersDisplayEditor', editorDisplayUserRouter);
 
+//AdminShowAllWorkshopsRouter adminDashboardWorkshopRouter
+const adminDashboardWorkshopRouter = require('./routes/AdminDashboardWorkshops.js');
+app.use('/adminDashboardViewWorkshops', adminDashboardWorkshopRouter);
+
 //tempary user handling router
 const tempUsersViewRouter = require('./routes/tempUsersView');
 app.use('/tempuser', tempUsersViewRouter);
