@@ -12,7 +12,8 @@ cloudinary.config({
 
 })
 
-router.post('/upload',auth,authResearcher, (req,res) =>{
+// router.post('/upload',auth,authResearcher, (req,res) =>{
+router.post('/upload', (req,res) =>{
     try{
         console.log(req.files)
         if(!req.files || Object.keys(req.files).length === 0)
