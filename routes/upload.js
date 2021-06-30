@@ -12,7 +12,7 @@ cloudinary.config({
 
 })
 
-router.post('/upload', (req,res) =>{
+router.post('/upload',auth,authResearcher, (req,res) =>{
     try{
         console.log(req.files)
         if(!req.files || Object.keys(req.files).length === 0)
@@ -33,7 +33,7 @@ router.post('/upload', (req,res) =>{
             return res.status(400).json({msg: 'File type is not correct (Available Formats are pdf/jpeg/docx'})
         }
         
-
+        //resource_type: "raw"
         cloudinary.v2.uploader.upload(file.tempFilePath, {folder: "test"}, async(err, result) =>{
             if(err) throw err;
 
