@@ -26,7 +26,7 @@ ReviewerResearchRouter.route("/displayallR").get((req, res)=>{
 
 //Display all checked Researcher
 ReviewerResearchRouter.route("/checkedR").get((req, res)=>{
-    Researcher.find({}, function(docs, err){
+    Researcher.find({status: "Checked"}, function(docs, err){
         if(!err){
             res.send(docs)
         }else{
@@ -48,11 +48,19 @@ ReviewerResearchRouter.route("/updateR").post(async (req, res) => {
     })
 })
 
+ReviewerResearchRouter.route("/getwresearchers").post(async (req, res) => {
+    Researcher.find({researche_id: req.body.researche_id}, (docs, err) => {
+        if(!err){
+            res.send(docs);
+        }else{
+            res.send(err);
+        }
+    })
+})
+
 //Delete Workshop
-ReviewerResearchRouter.route("/delete").post(async (req, res) => {
-    Researcher.findOneAndDelete({workshopid: req.body.workshopid}, {
-        status: req.body.status
-    }, (err) => {
+ReviewerResearchRouter.route("/deleteR").post(async (req, res) => {
+    Researcher.findOneAndDelete({researche_id: req.body.researche_id}, (err) => {
         if(!err){
             res.send("Researcher Deleted..!")
         }else{

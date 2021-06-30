@@ -43,6 +43,11 @@ const researcherSchema = new mongoose.Schema({
         type: String,
         required: true,
         trim: true
+    },
+    status:{
+        type: String,
+        default: 'un_checked'
+
     }
 
 
