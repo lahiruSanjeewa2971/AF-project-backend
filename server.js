@@ -81,7 +81,7 @@ app.use('/manageResearchers', manageResearchersRouter);
 
 
 const reviewerWorkshopRouter = require('./routes/reviewerWorkshopRouter.js');
-app.use("/workshops", reviewerWorkshopRouter);
+app.use("/workshopsReviewer", reviewerWorkshopRouter);
 
 const ReviewerResearchRouter = require('./routes/ReviewerResearchRouter');
 app.use("/researchers", ReviewerResearchRouter);
