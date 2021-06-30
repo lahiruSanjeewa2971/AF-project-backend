@@ -1,6 +1,7 @@
 const adminConferenceRouter = require('express').Router();
 let ConferenceAdmin = require('../models/conference');
 
+//view Single Conference data
 adminConferenceRouter.route("/getSingleConference").post( (req, res) => {
     ConferenceAdmin.find({conferenceid: req.body.conferenceid}, (docs, err) => {
         if(!err){
@@ -11,7 +12,7 @@ adminConferenceRouter.route("/getSingleConference").post( (req, res) => {
         }
     })
 })
-//Display all Conferences uploaded for Editor
+//Display all Conferences uploaded in Editor
 adminConferenceRouter.route("/displayallEditorConferences").get((req, res) => {
     ConferenceAdmin.find({}, function(docs, err){
         if(!docs, err){

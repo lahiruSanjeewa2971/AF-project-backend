@@ -1,6 +1,5 @@
 const reviewerWorkshopRouter = require('express').Router();
 let Workshop = require('../models/workshopModel');
-let Researcher = require('../models/researcherModel')
 
 
 //Display not checked workshops 
@@ -36,10 +35,35 @@ reviewerWorkshopRouter.route("/checkedW").get((req, res)=>{
     })
 })
 
-//Update Status
-reviewerWorkshopRouter.route("/updateworkshopstatus").post(async (req, res) => {
+//getWorkshop details by reviewer   getwworkshops
+reviewerWorkshopRouter.route("/getwworkshops").post( (req, res) => {
+    Workshop.find({workshop_id: req.body.workshop_id}, (docs, err) => {
+        if(!err){
+            res.send(docs);
+        }
+        else{
+            res.send(err);
+        }
+    })
+})
+//Update Workshop status by reviewer    updateworkshopstatus
+reviewerWorkshopRouter.route("/updateworkshopstatus").post( (req, res) => {
     Workshop.findOneAndUpdate({workshop_id: req.body.workshop_id}, {
-        
+        status: req.body.status,
+
+    }, (err) => {
+        if(!err){
+            res.send('Updated details')
+        }
+        else{
+            res.send(err)
+        }
+    })
+})
+
+//Update Status
+reviewerWorkshopRouter.route("/updateW").post(async (req, res) => {
+    Workshop.findOneAndUpdate({workshop_id: req.body.workshop_id}, {
         status: req.body.status
 
     }, (err) => {

@@ -25,6 +25,18 @@ const conference = new Schema({
         type: String,
         require: true
     },
+    time: {
+        type: String,
+        require: true
+    },
+    category: {
+        type: String,
+        require: true
+    },
+    researcher: {
+        type: String,
+        require: true
+    },
     status: {
         type: String,
         default: 'Not checked'

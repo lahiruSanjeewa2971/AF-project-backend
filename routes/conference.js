@@ -10,6 +10,9 @@ conferenceRouter.route("/addconference").post((req, res)=>{
     const location = req.body.location;
     const description = req.body.description;
     const note = req.body.note;
+    const time = req.body.time;
+    const category = req.body.category;
+    const researcher = req.body.researcher;
 
     const newConference = new Conference({
         conferenceid,
@@ -18,6 +21,9 @@ conferenceRouter.route("/addconference").post((req, res)=>{
         location,
         description,
         note,
+        time,
+        category,
+        researcher,
     })
     newConference.save().then(()=>{
         res.json("Conference Added")
@@ -54,7 +60,10 @@ conferenceRouter.route("/updateconference").post(async (req, res) => {
         date: req.body.date,
         location: req.body.location,
         description: req.body.description,
-        note: req.body.note
+        note: req.body.note,
+        time: req.body.time,
+        category: res.date.category,
+        researcher: res.date.researcher
 
     }, (err) => {
         if(!err){
@@ -110,5 +119,28 @@ conferenceRouter.route("/displayconferences").get((req, res)=>{
         }
     })
 })
+//Delete conference by editor
+conferenceRouter.post("/delete", (req, res) => {
+    Conference.findOneAndDelete({conferenceid: req.body.conferenceid}, (err) => {
+        if(!err){
+            res.send("Conference deleted...")
+        }
+        else{
+            res.send(err)
+        }
+    })
+})
+/**
+ * serviceRouter.post("/delete", (req, res) => {
+    Service.findOneAndDelete({serviceid: req.body.serviceid}, (err)=> {
+        if(!err){
+            res.send("Post deleted...")
+        }
+        else{
+            res.send(err)
+        }
+    })
+})
+ */
 
 module.exports = conferenceRouter;
