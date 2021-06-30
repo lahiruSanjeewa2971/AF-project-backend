@@ -75,7 +75,9 @@ app.use('/adminDashboardViewWorkshops', adminDashboardWorkshopRouter);
 const tempUsersViewRouter = require('./routes/tempUsersView');
 app.use('/tempuser', tempUsersViewRouter);
 
-
+//route for manage researchers for editor and admin
+const manageResearchersRouter = require('./routes/manageResearchers.js');
+app.use('/manageResearchers', manageResearchersRouter);
 
 
 const reviewerWorkshopRouter = require('./routes/reviewerWorkshopRouter.js');

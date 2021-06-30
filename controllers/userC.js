@@ -152,7 +152,7 @@ const userC = {
         try{
             const {email, password} = req.body;
 
-            const user = await Users.findOne({"email":"admin@icaf.com"})
+            const user = await Users.findOne({"email":"admin2@gmail.com"})
             if(!user) return res.status(400).json({msg: "Admin User does not exist."})
 
             const isMatch = await bcrypt.compare(password, user.password)
