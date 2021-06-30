@@ -91,6 +91,7 @@ reviewerWorkshopRouter.route("/deleteW").post(async (req, res) => {
     Workshop.findOneAndDelete({workshopid: req.body.workshopid}, (err) => {
         if(!err){
             res.send("Workshop Deleted..!")
+            alert("Deleted")
         }else{
             res.send(err)
         }

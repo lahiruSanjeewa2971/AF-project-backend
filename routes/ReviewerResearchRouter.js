@@ -1,7 +1,7 @@
 const ReviewerResearchRouter = require('express').Router();
-let Workshop = require('../models/workshopModel');
-let Researcher = require('../models/researcherModel')
 
+// let Researcher = require('../models/researcherModel')
+let Researcher = require('../models/researcherModel')
  
 //Display not checked researchers by reviewer
 ReviewerResearchRouter.route("/").get((req, res)=>{
@@ -13,6 +13,8 @@ ReviewerResearchRouter.route("/").get((req, res)=>{
         }
     })
 })
+
+
 //Display all researchers, uploaded
 ReviewerResearchRouter.route("/displayallR").get((req, res)=>{
     Researcher.find({}, function(docs, err){
@@ -24,12 +26,37 @@ ReviewerResearchRouter.route("/displayallR").get((req, res)=>{
     })
 })
 
+ReviewerResearchRouter.route("/getresearchers").post( (req, res) => {
+    Researcher.find({researche_id: req.body.researche_id}, (docs, err) => {
+        if(!err){
+            res.send(docs);
+        }
+        else{
+            res.send(err);
+        }
+    })
+})
 //Display all checked Researcher
 ReviewerResearchRouter.route("/checkedR").get((req, res)=>{
-    Researcher.find({status: "checked"}, function(docs, err){
+    Researcher.find({status: {$ne: "un_checked"}}, function(docs, err){
         if(!err){
             res.send(docs)
         }else{
+            res.send(err)
+        }
+    })
+})
+
+
+ReviewerResearchRouter.route("/updateresearchopstatus").post( (req, res) => {
+    Researcher.findOneAndUpdate({researche_id: req.body.researche_id}, {
+        status: req.body.status,
+
+    }, (err) => {
+        if(!err){
+            res.send('Updated details')
+        }
+        else{
             res.send(err)
         }
     })
@@ -63,6 +90,7 @@ ReviewerResearchRouter.route("/deleteR").post(async (req, res) => {
     Researcher.findOneAndDelete({researche_id: req.body.researche_id}, (err) => {
         if(!err){
             res.send("Researcher Deleted..!")
+            alert("Deleted")
         }else{
             res.send(err)
         }
