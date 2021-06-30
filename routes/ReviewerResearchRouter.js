@@ -26,7 +26,7 @@ ReviewerResearchRouter.route("/displayallR").get((req, res)=>{
 
 //Display all checked Researcher
 ReviewerResearchRouter.route("/checkedR").get((req, res)=>{
-    Researcher.find({status: "Checked"}, function(docs, err){
+    Researcher.find({status: "checked"}, function(docs, err){
         if(!err){
             res.send(docs)
         }else{

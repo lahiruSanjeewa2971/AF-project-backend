@@ -26,7 +26,7 @@ reviewerWorkshopRouter.route("/displayallW").get((req, res)=>{
 
 //Display checked workshops
 reviewerWorkshopRouter.route("/checkedW").get((req, res)=>{
-    Workshop.find({status: "Checked"}, function(docs, err){
+    Workshop.find({status: {$ne: "un_checked"}}, function(docs, err){
         if(!err){
             res.send(docs)
         }else{
