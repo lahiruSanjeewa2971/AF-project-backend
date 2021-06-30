@@ -26,7 +26,7 @@ reviewerWorkshopRouter.route("/displayallW").get((req, res)=>{
 
 //Display checked workshops
 reviewerWorkshopRouter.route("/checkedW").get((req, res)=>{
-    Workshop.find({status: "Checked"}, function(docs, err){
+    Workshop.find({status: {$ne: "un_checked"}}, function(docs, err){
         if(!err){
             res.send(docs)
         }else{
@@ -65,20 +65,30 @@ reviewerWorkshopRouter.route("/updateworkshopstatus").post( (req, res) => {
 reviewerWorkshopRouter.route("/updateW").post(async (req, res) => {
     Workshop.findOneAndUpdate({workshop_id: req.body.workshop_id}, {
         status: req.body.status
+
     }, (err) => {
         if(!err){
-            res.send("Status has being changed..!")
-        }else{
+            res.send('Status Updated By Reviewer')
+        }
+        else{
             res.send(err)
         }
     })
 })
 
+reviewerWorkshopRouter.route("/getwworkshops").post(async (req, res) => {
+    Workshop.find({workshop_id: req.body.workshop_id}, (docs, err) => {
+        if(!err){
+            res.send(docs);
+        }else{
+            res.send(err);
+        }
+    })
+})
+
 //Delete Workshop
-reviewerWorkshopRouter.route("/delete").post(async (req, res) => {
-    Workshop.findOneAndDelete({workshopid: req.body.workshopid}, {
-        status: req.body.status
-    }, (err) => {
+reviewerWorkshopRouter.route("/deleteW").post(async (req, res) => {
+    Workshop.findOneAndDelete({workshopid: req.body.workshopid}, (err) => {
         if(!err){
             res.send("Workshop Deleted..!")
         }else{
